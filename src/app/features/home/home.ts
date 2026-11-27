@@ -35,10 +35,10 @@ export default class Home {
       path: '/newsletter',
     },
     {
-      icon: 'card',
-      title: 'Make a Payment',
-      text: 'Pay your invoice quickly and securely.',
-      path: '/payment',
+      icon: 'clock',
+      title: 'Tax Deadlines',
+      text: 'Key filing dates you can add to your calendar.',
+      path: '/tax-deadlines',
     },
   ];
   protected readonly reasons = [

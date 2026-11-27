@@ -45,4 +45,3 @@ All in `src/app/core/data/site.config.ts`:
   Calendly, Cal.com and Microsoft Bookings (for Outlook) links work the same way.
 - **Contact form.** Create a free form at formspree.io with the office email and paste its URL into
   `contactFormEndpoint`.
-- **Payments.** Paste the hosted payment link from PayPal, Stripe or CPACharge into `paymentUrl`.

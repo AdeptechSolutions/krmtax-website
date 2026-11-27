@@ -35,10 +35,6 @@ const FAQS: { q: string; a: string }[] = [
     a: 'Yes. We provide bookkeeping, payroll, financial statements and tax returns for sole proprietors, partnerships, LLCs and corporations, plus business valuations.',
   },
   {
-    q: 'How can I pay my invoice?',
-    a: 'You can pay online with PayPal or a major credit or debit card on our Make a Payment page, or call the office.',
-  },
-  {
     q: 'How do I check on my refund?',
     a: 'Use the IRS “Where’s My Refund?” tool for your federal refund and MyTax Illinois for your state refund. Links are on our Helpful Links page.',
   },
@@ -78,7 +74,7 @@ export default class Faq {
     seo.update({
       title: 'FAQ',
       description:
-        'Answers to common questions about tax appointments, documents, deadlines, extensions, IRS letters and payments.',
+        'Answers to common questions about tax appointments, documents, deadlines, extensions, refunds and IRS letters.',
       path: '/faq',
     });
     seo.setJsonLd('faq', {

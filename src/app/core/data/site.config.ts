@@ -29,11 +29,6 @@ export const SITE = {
    */
   contactFormEndpoint: '',
   /**
-   * Hosted payment link (PayPal, Stripe Payment Link, LawPay/CPACharge...).
-   * Leave empty to show "call the office" instructions instead.
-   */
-  paymentUrl: '',
-  /**
    * Online appointment booking. Paste the booking page URL from any of:
    *  - Google Calendar appointment schedule (calendar.app.google/... or calendar.google.com/calendar/appointments/...)
    *  - Calendly (https://calendly.com/your-name/consultation)
@@ -80,7 +75,6 @@ export const NAV: NavItem[] = [
       { label: 'Newsletter', path: '/newsletter' },
       { label: 'Forms', path: '/forms' },
       { label: 'Helpful Links', path: '/resources' },
-      { label: 'Make a Payment', path: '/payment' },
     ],
   },
   { label: 'FAQ', path: '/faq' },

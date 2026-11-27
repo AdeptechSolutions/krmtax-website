@@ -30,7 +30,7 @@ scripts/postbuild.mjs   # sitemap.xml + 404.html for static hosting
 
 Home · Services (+7 detail pages) · About · Book an appointment · Financial calculators (17, all built in) ·
 Tax organizer (interactive, printable checklist) · Tax deadlines (with add-to-calendar) · Newsletter · Forms ·
-Helpful links · Make a payment · FAQ · Contact (form + map) · Terms & disclaimer · Theme preview
+Helpful links · FAQ · Contact (form + map) · Terms & disclaimer · Theme preview
 
 Old krmtax.com URLs (`/about-us`, `/contact-us`, `/our-services`, `/payroll`, ...) redirect to their new pages.
 
@@ -50,7 +50,6 @@ npm run test:ci
 | --- | --- |
 | `bookingUrl` | Online booking page (Google Calendar appointment schedule, Calendly, Cal.com or Microsoft Bookings). Appointments go straight to the office calendar. Empty = appointment request form. |
 | `contactFormEndpoint` | Form backend URL (e.g. Formspree). Empty = form opens the visitor's email app. |
-| `paymentUrl` | Hosted payment link (PayPal, Stripe Payment Link, CPACharge...). Empty = "call to pay" text. |
 | `clientPortalUrl` | Secure document portal link. |
 | `newsletterSubscribeUrl` | Newsletter signup link. |
 

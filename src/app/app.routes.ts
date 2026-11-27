@@ -15,7 +15,6 @@ export const routes: Routes = [
   { path: 'newsletter', loadComponent: () => import('./features/newsletter/newsletter') },
   { path: 'forms', loadComponent: () => import('./features/forms/forms') },
   { path: 'resources', loadComponent: () => import('./features/resources/resources') },
-  { path: 'payment', loadComponent: () => import('./features/payment/payment') },
   { path: 'contact', loadComponent: () => import('./features/contact/contact') },
   { path: 'book', loadComponent: () => import('./features/book/book') },
   { path: 'faq', loadComponent: () => import('./features/faq/faq') },
@@ -36,7 +35,7 @@ export const routes: Routes = [
   { path: 'financial-calculators', redirectTo: 'calculators' },
   { path: 'contact-us', redirectTo: 'contact' },
   { path: 'online-resources', redirectTo: 'resources' },
-  { path: 'make-a-payment', redirectTo: 'payment' },
+  { path: 'make-a-payment', redirectTo: 'contact' },
 
   { path: '**', loadComponent: () => import('./features/not-found/not-found') },
 ];
