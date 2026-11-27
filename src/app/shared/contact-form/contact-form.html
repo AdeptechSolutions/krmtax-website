@@ -48,17 +48,38 @@
       </div>
     </div>
     @if (mode() === 'appointment') {
-      <div class="field">
-        <label for="cf-pref">Preferred days and times</label>
-        <input
-          id="cf-pref"
-          formControlName="preferred"
-          placeholder="e.g. Tuesday or Thursday mornings"
-        />
+      <div class="form__row">
+        <div class="field">
+          <label for="cf-date">Preferred date *</label>
+          <input
+            id="cf-date"
+            type="date"
+            formControlName="date"
+            [min]="minDate"
+            [attr.aria-invalid]="invalid('date')"
+          />
+          @if (invalid('date')) {
+            <small class="field__error">Please pick a weekday (Monday to Friday).</small>
+          }
+        </div>
+        <div class="field">
+          <label for="cf-time">Preferred time *</label>
+          <select id="cf-time" formControlName="time" [attr.aria-invalid]="invalid('time')">
+            <option value="">Select a time</option>
+            @for (t of timeSlots; track t) {
+              <option [value]="t">{{ t }}</option>
+            }
+          </select>
+          @if (invalid('time')) {
+            <small class="field__error">Please choose a time.</small>
+          }
+        </div>
       </div>
     }
     <div class="field">
-      <label for="cf-msg">Message *</label>
+      <label for="cf-msg">{{
+        mode() === 'appointment' ? 'Anything we should know? (optional)' : 'Message *'
+      }}</label>
       <textarea
         id="cf-msg"
         rows="5"

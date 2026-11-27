@@ -11,11 +11,7 @@ import { PageHero } from '../../shared/page-hero/page-hero';
   selector: 'app-book',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [PageHero, ContactForm, Icon, RouterLink],
-  template: `<app-page-hero
-      eyebrow="Appointments"
-      heading="Book an appointment"
-      lead="Pick a time that works for you. Your appointment goes straight onto our calendar and you'll get a confirmation by email."
-    />
+  template: `<app-page-hero eyebrow="Appointments" heading="Book an appointment" [lead]="lead" />
     <section class="section">
       <div class="container split split--wide">
         <div>
@@ -31,7 +27,8 @@ import { PageHero } from '../../shared/page-hero/page-hero';
             <div class="card">
               <h2>Request an appointment</h2>
               <p>
-                Tell us what you need and when you're available, and we'll confirm a time with you.
+                Pick a weekday and time. We will confirm by email or phone, usually within one
+                business day.
               </p>
               <app-contact-form mode="appointment" />
             </div>
@@ -65,6 +62,9 @@ import { PageHero } from '../../shared/page-hero/page-hero';
 })
 export default class Book {
   protected readonly site = SITE;
+  protected readonly lead = SITE.bookingUrl
+    ? "Pick a time that works for you. Your appointment goes straight onto our calendar and you'll get a confirmation by email."
+    : "Choose a date and time that works for you and we'll confirm your appointment by email or phone.";
   // Trusted: value comes from our own site config, never from user input.
   protected readonly bookingUrl = SITE.bookingUrl
     ? inject(DomSanitizer).bypassSecurityTrustResourceUrl(SITE.bookingUrl)
