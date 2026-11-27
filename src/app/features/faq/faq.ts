@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SITE } from '../../core/data/site.config';
+import { TAX_YEAR } from '../../core/data/tax-year';
 import { SeoService } from '../../core/services/seo.service';
 import { PageHero } from '../../shared/page-hero/page-hero';
 import { CtaBand } from '../../shared/cta-band/cta-band';
@@ -20,7 +21,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: 'When is the tax filing deadline?',
-    a: 'For most individuals, federal and Illinois returns for tax year 2026 are due April 15, 2027. See our Tax Deadlines page for business, estimated tax and extension dates.',
+    a: `For most individuals, federal and Illinois returns for tax year ${TAX_YEAR} are due April 15, ${TAX_YEAR + 1}. See our Tax Deadlines page for business, estimated tax and extension dates.`,
   },
   {
     q: 'What if I can’t file by the deadline?',

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CALCULATORS, CALC_CATEGORIES } from '../../core/data/calculators.data';
+import { TAX_YEAR } from '../../core/data/tax-year';
 import { SeoService } from '../../core/services/seo.service';
 import { Icon } from '../../shared/icon/icon';
 import { PageHero } from '../../shared/page-hero/page-hero';
@@ -31,13 +32,15 @@ import { PageHero } from '../../shared/page-hero/page-hero';
           </div>
         }
         <p class="muted small">
-          Calculators are for illustration only and are not tax, legal or financial advice. Contact
-          us to review your situation.
+          Tax calculators use federal figures for tax year {{ taxYear }}. Calculators are for
+          illustration only and are not tax, legal or financial advice. Contact us to review your
+          situation.
         </p>
       </div>
     </section>`,
 })
 export default class CalculatorsList {
+  protected readonly taxYear = TAX_YEAR;
   protected readonly groups = CALC_CATEGORIES.map((category) => ({
     category,
     items: CALCULATORS.filter((c) => c.category === category),

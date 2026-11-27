@@ -3,6 +3,14 @@
  * and a pure `compute` function, and a single generic component renders it.
  * Add a calculator by adding an entry here; no new component needed.
  */
+import {
+  BRACKETS,
+  RMD_START_AGE,
+  STANDARD_DEDUCTION,
+  TAX_YEAR,
+  UNIFORM_LIFETIME_TABLE,
+} from './tax-year';
+
 export type InputKind = 'currency' | 'percent' | 'number' | 'years' | 'select';
 export type OutputFormat = 'currency' | 'percent' | 'number' | 'months' | 'text';
 
@@ -78,30 +86,6 @@ export function monthsToPayoff(balance: number, annualRatePct: number, monthly: 
   return Math.ceil(-Math.log(1 - (r * balance) / monthly) / Math.log(1 + r));
 }
 
-// 2026 federal brackets (IRS Rev. Proc. 2025-32). Estimates only.
-const BRACKETS: Record<number, [number, number][]> = {
-  // [upper limit of bracket, rate]
-  1: [
-    [12400, 0.1],
-    [50400, 0.12],
-    [105700, 0.22],
-    [201775, 0.24],
-    [256225, 0.32],
-    [640600, 0.35],
-    [Infinity, 0.37],
-  ],
-  2: [
-    [24800, 0.1],
-    [100800, 0.12],
-    [211400, 0.22],
-    [403550, 0.24],
-    [512450, 0.32],
-    [768700, 0.35],
-    [Infinity, 0.37],
-  ],
-};
-const STANDARD_DEDUCTION: Record<number, number> = { 1: 16100, 2: 32200 };
-
 export function federalTax(taxable: number, status: number): { tax: number; marginal: number } {
   const brackets = BRACKETS[status] ?? BRACKETS[1];
   let tax = 0;
@@ -116,38 +100,6 @@ export function federalTax(taxable: number, status: number): { tax: number; marg
   return { tax, marginal };
 }
 
-// IRS Uniform Lifetime Table (2022+) distribution periods, ages 73-100.
-const ULT: Record<number, number> = {
-  73: 26.5,
-  74: 25.5,
-  75: 24.6,
-  76: 23.7,
-  77: 22.9,
-  78: 22.0,
-  79: 21.1,
-  80: 20.2,
-  81: 19.4,
-  82: 18.5,
-  83: 17.7,
-  84: 16.8,
-  85: 16.0,
-  86: 15.2,
-  87: 14.4,
-  88: 13.7,
-  89: 12.9,
-  90: 12.2,
-  91: 11.5,
-  92: 10.8,
-  93: 10.1,
-  94: 9.5,
-  95: 8.9,
-  96: 8.4,
-  97: 7.8,
-  98: 7.3,
-  99: 6.8,
-  100: 6.4,
-};
-
 const FILING_STATUS = [
   { label: 'Single', value: 1 },
   { label: 'Married filing jointly', value: 2 },
@@ -160,7 +112,7 @@ export const CALCULATORS: Calculator[] = [
     slug: 'income-tax-estimator',
     title: 'Federal Income Tax Estimator',
     category: 'Tax',
-    description: 'Estimate your 2026 federal income tax, effective rate and marginal bracket.',
+    description: `Estimate your ${TAX_YEAR} federal income tax, effective rate and marginal bracket.`,
     inputs: [
       { key: 'status', label: 'Filing status', kind: 'select', value: 1, options: FILING_STATUS },
       { key: 'income', label: 'Total income', kind: 'currency', value: 85000 },
@@ -176,7 +128,10 @@ export const CALCULATORS: Calculator[] = [
     ],
     compute: (v) => {
       const agi = Math.max(0, v['income'] - v['adjust']);
-      const deduction = Math.max(STANDARD_DEDUCTION[v['status']] ?? 16100, v['itemized']);
+      const deduction = Math.max(
+        STANDARD_DEDUCTION[v['status']] ?? STANDARD_DEDUCTION[1],
+        v['itemized'],
+      );
       const taxable = Math.max(0, agi - deduction);
       const { tax, marginal } = federalTax(taxable, v['status']);
       const owed = Math.max(0, tax - v['credits']);
@@ -192,7 +147,7 @@ export const CALCULATORS: Calculator[] = [
         { label: 'Marginal bracket', value: marginal * 100, format: 'percent' },
       ];
     },
-    note: 'Uses 2026 federal brackets and standard deductions. Excludes AMT, self-employment tax and special situations.',
+    note: `Tax year ${TAX_YEAR}: uses ${TAX_YEAR} federal brackets and standard deductions. Excludes AMT, self-employment tax and special situations.`,
   },
   {
     slug: 'taxable-vs-tax-advantaged',
@@ -263,17 +218,17 @@ export const CALCULATORS: Calculator[] = [
     ],
     compute: (v) => {
       const age = Math.round(v['age']);
-      if (age < 73) {
+      if (age < RMD_START_AGE) {
         return [
           {
             label: 'Required distribution',
-            value: 'Not yet required (RMDs start at 73)',
+            value: `Not yet required (RMDs start at ${RMD_START_AGE})`,
             format: 'text',
             primary: true,
           },
         ];
       }
-      const period = ULT[Math.min(age, 100)];
+      const period = UNIFORM_LIFETIME_TABLE[Math.min(age, 100)];
       return [
         {
           label: 'Required distribution',

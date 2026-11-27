@@ -1,0 +1,46 @@
+name: Yearly reminders
+
+# Opens a to-do (GitHub issue) for recurring maintenance. GitHub emails the
+# repository owner about new issues, so this doubles as an email reminder
+# (make sure "Watching" is on for this repo and email notifications are enabled
+# at https://github.com/settings/notifications).
+on:
+  schedule:
+    - cron: '0 14 15 11 *' # every November 15, 9 AM Eastern
+  workflow_dispatch: # lets you trigger it manually from the Actions tab to test
+
+permissions:
+  issues: write
+
+jobs:
+  tax-year-update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const next = new Date().getFullYear() + 1;
+            const title = `Update website tax figures for tax year ${next - 1} → ${next}`;
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo, state: 'open',
+            });
+            if (existing.data.some((i) => i.title === title)) return;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              assignees: [context.repo.owner],
+              body: [
+                'Yearly reminder: the IRS has usually published next year\'s inflation adjustments by now.',
+                '',
+                'Everything to change is in **`src/app/core/data/tax-year.ts`**:',
+                '',
+                '- [ ] `TAX_YEAR`, `BRACKETS`, `STANDARD_DEDUCTION` (IRS newsroom → "tax inflation adjustments")',
+                '- [ ] `FILING_DEADLINES` for the next filing season (https://www.irs.gov/filing/individuals/when-to-file)',
+                '- [ ] `RMD_START_AGE` if the law changed (75 from 2033)',
+                '- [ ] `LAST_REVIEWED` date',
+                '- [ ] Review the newsletter topics and FAQ answers for anything year-specific',
+                '',
+                'Commit to `main` and the site redeploys automatically. See TODO.md for the full list.',
+              ].join('\n'),
+            });

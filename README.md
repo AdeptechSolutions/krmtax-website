@@ -56,6 +56,10 @@ npm run test:ci
 To pick the final theme, set `DEFAULT_THEME` in `src/app/core/services/theme.service.ts` and the `data-theme`
 attribute in `src/index.html`, then remove `<app-theme-switcher />` from `src/app/app.ts`.
 
+## To-do list
+
+See [TODO.md](TODO.md) for launch tasks, yearly maintenance and reminder setup.
+
 ## Deployment
 
 See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
