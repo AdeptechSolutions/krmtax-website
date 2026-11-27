@@ -1,0 +1,112 @@
+@if (calc(); as c) {
+  <app-page-hero
+    [eyebrow]="c.category + ' calculator'"
+    [heading]="c.title"
+    [lead]="c.description"
+  />
+  <section class="section">
+    <div class="container calc">
+      <form class="calc__form card" (submit)="$event.preventDefault()">
+        <h2>Your numbers</h2>
+        @for (i of c.inputs; track i.key) {
+          <div class="field">
+            <label [for]="i.key">{{ i.label }}</label>
+            @if (i.kind === 'select') {
+              <select
+                [id]="i.key"
+                [value]="values()[i.key]"
+                (change)="setValue(i.key, $any($event.target).value)"
+              >
+                @for (o of i.options; track o.value) {
+                  <option [value]="o.value" [selected]="o.value === values()[i.key]">
+                    {{ o.label }}
+                  </option>
+                }
+              </select>
+            } @else {
+              <div
+                class="input-affix"
+                [attr.data-prefix]="i.kind === 'currency' ? '$' : null"
+                [attr.data-suffix]="i.kind === 'percent' ? '%' : i.kind === 'years' ? 'yrs' : null"
+              >
+                <input
+                  [id]="i.key"
+                  type="number"
+                  inputmode="decimal"
+                  [step]="i.kind === 'percent' ? 0.05 : 1"
+                  [value]="values()[i.key]"
+                  (input)="setValue(i.key, $any($event.target).value)"
+                />
+              </div>
+            }
+            @if (i.hint) {
+              <small class="field__hint">{{ i.hint }}</small>
+            }
+          </div>
+        }
+        <button type="button" class="btn btn--ghost btn--sm" (click)="reset()">
+          Reset to example
+        </button>
+      </form>
+
+      <div class="calc__results" aria-live="polite">
+        @for (r of results(); track r.label) {
+          <div class="result" [class.result--primary]="r.primary">
+            <span class="result__label">{{ r.label }}</span>
+            <span class="result__value">
+              @if (isNumber(r.value)) {
+                @switch (r.format) {
+                  @case ('currency') {
+                    {{ r.value | currency: 'USD' : 'symbol' : '1.0-0' }}
+                  }
+                  @case ('percent') {
+                    {{ r.value | number: '1.1-2' }}%
+                  }
+                  @case ('months') {
+                    {{ r.value | number: '1.0-0' }} months
+                    <small>({{ r.value / 12 | number: '1.1-1' }} yrs)</small>
+                  }
+                  @default {
+                    {{ r.value | number: '1.0-2' }}
+                  }
+                }
+              } @else {
+                {{ r.value }}
+              }
+            </span>
+          </div>
+        }
+        @if (c.note) {
+          <p class="muted small">{{ c.note }}</p>
+        }
+        <p class="muted small">For illustration only. Not tax, legal or financial advice.</p>
+        <a class="btn btn--primary" routerLink="/contact">Talk to us about your results</a>
+      </div>
+    </div>
+  </section>
+
+  @if (related().length) {
+    <section class="section section--alt">
+      <div class="container">
+        <h2 class="section__title">More {{ c.category.toLowerCase() }} calculators</h2>
+        <div class="grid grid--3">
+          @for (r of related(); track r.slug) {
+            <a class="card card--link" [routerLink]="['/calculators', r.slug]">
+              <span class="card__icon"><app-icon name="calculator" /></span>
+              <h3>{{ r.title }}</h3>
+              <p>{{ r.description }}</p>
+            </a>
+          }
+        </div>
+        <p>
+          <a routerLink="/calculators">All calculators <app-icon name="arrow" [size]="16" /></a>
+        </p>
+      </div>
+    </section>
+  }
+} @else {
+  <app-page-hero heading="Calculator not found" />
+  <div class="container section">
+    <a class="btn btn--primary" routerLink="/calculators">All calculators</a>
+  </div>
+}

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-theme="heritage">
+  <head>
+    <meta charset="utf-8" />
+    <title>KRM Financial Services, Ltd.</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Professional tax and financial services in Hoffman Estates, IL."
+    />
+    <meta name="theme-color" content="#0f2a4a" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Lora:wght@500;600;700&display=swap"
+    />
+    <script>
+      // Apply the saved theme before first paint to avoid a flash of the default theme.
+      try {
+        var t =
+          new URLSearchParams(location.search).get('theme') || localStorage.getItem('krm-theme');
+        if (t && /^(heritage|horizon|evergreen|midnight)$/.test(t))
+          document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "AccountingService",
+        "name": "KRM Financial Services, Ltd.",
+        "url": "https://krmtax.com",
+        "telephone": "+1-847-519-7207",
+        "email": "pparmar@krmtax.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "2300 N. Barrington Road, Suite 400",
+          "addressLocality": "Hoffman Estates",
+          "addressRegion": "IL",
+          "postalCode": "60169",
+          "addressCountry": "US"
+        },
+        "areaServed": "Chicago metropolitan area",
+        "description": "Individual and business tax returns, tax planning, bookkeeping, payroll, financial statements and business valuations."
+      }
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
+</html>

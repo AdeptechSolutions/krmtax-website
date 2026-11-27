@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /themes
+
+Sitemap: https://krmtax.com/sitemap.xml

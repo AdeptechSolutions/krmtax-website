@@ -1,0 +1,60 @@
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div>
+      <a routerLink="/" class="brand brand--footer">
+        <span class="brand__mark">KRM</span>
+        <span class="brand__text"
+          ><strong>KRM Financial Services</strong><small>Tax &amp; Accounting</small></span
+        >
+      </a>
+      <p class="muted">
+        {{ site.tagline }} Serving individuals and small businesses from Hoffman Estates, Illinois.
+      </p>
+    </div>
+    <div>
+      <h3>Services</h3>
+      <ul>
+        @for (s of services; track s.slug) {
+          <li>
+            <a [routerLink]="['/services', s.slug]">{{ s.title }}</a>
+          </li>
+        }
+      </ul>
+    </div>
+    <div>
+      <h3>Client resources</h3>
+      <ul>
+        <li><a routerLink="/calculators">Financial Calculators</a></li>
+        <li><a routerLink="/tax-organizer">Tax Organizer</a></li>
+        <li><a routerLink="/newsletter">Newsletter</a></li>
+        <li><a routerLink="/forms">Forms</a></li>
+        <li><a routerLink="/resources">Helpful Links</a></li>
+        <li><a routerLink="/payment">Make a Payment</a></li>
+        <li><a [href]="site.clientPortalUrl" target="_blank" rel="noopener">Client Portal</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <ul class="contact-list">
+        <li>
+          <app-icon name="pin" [size]="18" />
+          <a [href]="site.mapLinkUrl" target="_blank" rel="noopener">{{ address }}</a>
+        </li>
+        <li>
+          <app-icon name="phone" [size]="18" /> <a [href]="site.phoneHref">{{ site.phone }}</a>
+        </li>
+        <li>
+          <app-icon name="mail" [size]="18" />
+          <a [href]="'mailto:' + site.email">{{ site.email }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__legal">
+    <p>© {{ year }} {{ site.name }} All rights reserved.</p>
+    <p>
+      <a routerLink="/legal">Terms &amp; Disclaimer</a> ·
+      <a routerLink="/themes">Theme preview</a>
+    </p>
+  </div>
+</footer>

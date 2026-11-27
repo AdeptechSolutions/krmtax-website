@@ -1,0 +1,79 @@
+<div class="topbar">
+  <div class="container topbar__inner">
+    <span
+      ><app-icon name="pin" [size]="15" /> {{ site.address.city }}, {{ site.address.state }}</span
+    >
+    <span class="topbar__right">
+      <a [href]="site.phoneHref"><app-icon name="phone" [size]="15" /> {{ site.phone }}</a>
+      <a [href]="'mailto:' + site.email"><app-icon name="mail" [size]="15" /> {{ site.email }}</a>
+      <a routerLink="/payment"><app-icon name="card" [size]="15" /> Pay invoice</a>
+      <a [href]="site.clientPortalUrl" target="_blank" rel="noopener"
+        ><app-icon name="lock" [size]="15" /> Client Portal</a
+      >
+    </span>
+  </div>
+</div>
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a routerLink="/" class="brand" aria-label="KRM Financial Services home">
+      <span class="brand__mark">KRM</span>
+      <span class="brand__text">
+        <strong>KRM Financial Services</strong>
+        <small>Tax &amp; Accounting</small>
+      </span>
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="main-nav"
+      (click)="menuOpen.set(!menuOpen())"
+    >
+      <app-icon [name]="menuOpen() ? 'close' : 'menu'" />
+      <span class="sr-only">Menu</span>
+    </button>
+
+    <nav id="main-nav" class="main-nav" [class.is-open]="menuOpen()" aria-label="Main">
+      <ul>
+        @for (item of nav; track item.label) {
+          @if (item.children) {
+            <li class="has-dropdown" [class.is-open]="openDropdown() === item.label">
+              <button
+                type="button"
+                class="main-nav__link"
+                [attr.aria-expanded]="openDropdown() === item.label"
+                (click)="toggleDropdown(item.label)"
+              >
+                {{ item.label }} <app-icon name="chevron" [size]="16" />
+              </button>
+              <ul class="dropdown">
+                @for (child of item.children; track child.label) {
+                  <li>
+                    <a
+                      [routerLink]="child.path"
+                      routerLinkActive="is-active"
+                      [routerLinkActiveOptions]="{ exact: true }"
+                      >{{ child.label }}</a
+                    >
+                  </li>
+                }
+              </ul>
+            </li>
+          } @else {
+            <li>
+              <a
+                class="main-nav__link"
+                [routerLink]="item.path"
+                routerLinkActive="is-active"
+                [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+                >{{ item.label }}</a
+              >
+            </li>
+          }
+        }
+      </ul>
+      <a class="btn btn--accent btn--sm main-nav__cta" routerLink="/book">Book appointment</a>
+    </nav>
+  </div>
+</header>

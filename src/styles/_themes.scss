@@ -1,0 +1,100 @@
+// Design tokens. Each theme only overrides custom properties, so every
+// component automatically restyles. Add a theme by adding a block here
+// and an entry in THEMES (core/services/theme.service.ts).
+
+:root,
+[data-theme='heritage'] {
+  --c-primary: #0f2a4a;
+  --c-primary-600: #1b3d66;
+  --c-on-primary: #ffffff;
+  --c-accent: #c9a227;
+  --c-accent-600: #a8861a;
+  --c-on-accent: #1a1a1a;
+  --c-bg: #ffffff;
+  --c-bg-alt: #f7f4ec;
+  --c-surface: #ffffff;
+  --c-text: #1f2937;
+  --c-muted: #5b6472;
+  --c-border: #e5e1d6;
+  --c-hero-from: #0f2a4a;
+  --c-hero-to: #1d4170;
+  --c-hero-text: #ffffff;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --radius: 6px;
+  --radius-lg: 10px;
+  --shadow: 0 1px 2px rgb(15 42 74 / 6%), 0 8px 24px rgb(15 42 74 / 8%);
+  --heading-weight: 700;
+}
+
+[data-theme='horizon'] {
+  --c-primary: #2563eb;
+  --c-primary-600: #1d4ed8;
+  --c-on-primary: #ffffff;
+  --c-accent: #14b8a6;
+  --c-accent-600: #0d9488;
+  --c-on-accent: #ffffff;
+  --c-bg: #ffffff;
+  --c-bg-alt: #f1f5f9;
+  --c-surface: #ffffff;
+  --c-text: #0f172a;
+  --c-muted: #475569;
+  --c-border: #e2e8f0;
+  --c-hero-from: #eff6ff;
+  --c-hero-to: #ecfeff;
+  --c-hero-text: #0f172a;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shadow: 0 1px 3px rgb(15 23 42 / 6%), 0 12px 32px rgb(37 99 235 / 10%);
+  --heading-weight: 800;
+}
+
+[data-theme='evergreen'] {
+  --c-primary: #1f4d3a;
+  --c-primary-600: #2a6a50;
+  --c-on-primary: #ffffff;
+  --c-accent: #d97706;
+  --c-accent-600: #b45309;
+  --c-on-accent: #ffffff;
+  --c-bg: #fffdf8;
+  --c-bg-alt: #f3efe4;
+  --c-surface: #ffffff;
+  --c-text: #1c2b24;
+  --c-muted: #56645c;
+  --c-border: #e4ddcb;
+  --c-hero-from: #1f4d3a;
+  --c-hero-to: #2f6b52;
+  --c-hero-text: #fffdf8;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Lora', Georgia, serif;
+  --radius: 8px;
+  --radius-lg: 14px;
+  --shadow: 0 1px 2px rgb(31 77 58 / 6%), 0 10px 28px rgb(31 77 58 / 9%);
+  --heading-weight: 700;
+}
+
+[data-theme='midnight'] {
+  --c-primary: #f59e0b;
+  --c-primary-600: #fbbf24;
+  --c-on-primary: #0b1220;
+  --c-accent: #f59e0b;
+  --c-accent-600: #fbbf24;
+  --c-on-accent: #0b1220;
+  --c-bg: #0b1220;
+  --c-bg-alt: #111a2e;
+  --c-surface: #141f36;
+  --c-text: #e2e8f0;
+  --c-muted: #94a3b8;
+  --c-border: #24324f;
+  --c-hero-from: #0b1220;
+  --c-hero-to: #1a2744;
+  --c-hero-text: #f8fafc;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 12px 32px rgb(0 0 0 / 35%);
+  --heading-weight: 700;
+}

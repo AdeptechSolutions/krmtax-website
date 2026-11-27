@@ -1,0 +1,118 @@
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <p class="eyebrow">Tax &amp; Accounting · Hoffman Estates, IL</p>
+      <h1>Clear answers for your taxes and your business.</h1>
+      <p class="lead">
+        KRM Financial Services provides tax preparation, tax planning and accounting for individuals
+        and small businesses. Our online office brings financial services directly into your home or
+        business.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn--accent" routerLink="/book"
+          >Book an appointment <app-icon name="arrow" [size]="18"
+        /></a>
+        <a class="btn btn--ghost" routerLink="/services">Explore services</a>
+      </div>
+      <ul class="hero__trust">
+        <li><app-icon name="check" [size]="18" /> Individuals &amp; families</li>
+        <li><app-icon name="check" [size]="18" /> Small businesses</li>
+        <li><app-icon name="check" [size]="18" /> Year-round support</li>
+      </ul>
+    </div>
+    <div class="hero__card">
+      <h2>Talk to us today</h2>
+      <p>Questions about a return, a notice or next year's plan? We're happy to help.</p>
+      <a class="hero__contact" [href]="site.phoneHref"
+        ><app-icon name="phone" /> {{ site.phone }}</a
+      >
+      <a class="hero__contact" [href]="'mailto:' + site.email"
+        ><app-icon name="mail" /> {{ site.email }}</a
+      >
+      <a class="hero__contact" [href]="site.clientPortalUrl" target="_blank" rel="noopener"
+        ><app-icon name="lock" /> Secure client portal</a
+      >
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">What we do</p>
+      <h2>Services for individuals and businesses</h2>
+      <p class="lead">
+        From your personal return to your company's books, we handle the details so you can focus on
+        what matters.
+      </p>
+    </div>
+    <div class="grid grid--3">
+      @for (s of services; track s.slug) {
+        <a class="card card--link" [routerLink]="['/services', s.slug]">
+          <span class="card__icon"><app-icon [name]="s.icon" /></span>
+          <h3>{{ s.title }}</h3>
+          <p>{{ s.summary }}</p>
+          <span class="card__more">Learn more <app-icon name="arrow" [size]="16" /></span>
+        </a>
+      }
+      <a class="card card--link card--accent" routerLink="/book">
+        <span class="card__icon"><app-icon name="clock" /></span>
+        <h3>Not sure where to start?</h3>
+        <p>Book a quick call and we'll point you in the right direction.</p>
+        <span class="card__more">Book a call <app-icon name="arrow" [size]="16" /></span>
+      </a>
+      <a class="card card--link" routerLink="/calculators">
+        <span class="card__icon"><app-icon name="calculator" /></span>
+        <h3>Try our calculators</h3>
+        <p>Estimate your taxes, mortgage, retirement savings and more in seconds.</p>
+        <span class="card__more">Open calculators <app-icon name="arrow" [size]="16" /></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container split">
+    <div>
+      <p class="eyebrow">Why KRM</p>
+      <h2>Experienced, current and focused on you</h2>
+      <p>
+        KRM Financial Services, Ltd. provides accounting and tax preparation for a wide range of
+        clients, with a focus on individual tax filing and planning, small business bookkeeping and
+        financial statements, and corporate tax returns.
+      </p>
+      <a class="btn btn--primary" routerLink="/about">About the firm</a>
+    </div>
+    <div class="grid grid--2">
+      @for (r of reasons; track r.title) {
+        <div class="feature">
+          <span class="feature__icon"><app-icon [name]="r.icon" /></span>
+          <div>
+            <h3>{{ r.title }}</h3>
+            <p>{{ r.text }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <p class="eyebrow">Client tools</p>
+      <h2>Resources at your fingertips</h2>
+    </div>
+    <div class="grid grid--4">
+      @for (t of tools; track t.path) {
+        <a class="card card--link card--center" [routerLink]="t.path">
+          <span class="card__icon"><app-icon [name]="t.icon" /></span>
+          <h3>{{ t.title }}</h3>
+          <p>{{ t.text }}</p>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<app-cta-band />
