@@ -200,18 +200,35 @@
   .nav-toggle {
     display: inline-flex;
   }
+  .main-nav__cta {
+    margin-top: 0.75rem;
+  }
+  .site-header {
+    // backdrop-filter would make the header the containing block for the
+    // fixed mobile menu, so use a solid background on small screens.
+    backdrop-filter: none;
+    background: var(--c-bg);
+  }
   .main-nav {
-    position: absolute;
-    inset: 100% 0 auto;
+    // Full-height panel under the header. Fixed + top/bottom uses the visible
+    // viewport (unlike 100vh on mobile browsers), and the menu scrolls on its
+    // own without scrolling the page behind it.
+    position: fixed;
+    top: var(--nav-top, 74px);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
     flex-direction: column;
     align-items: stretch;
-    padding: 1rem 1.25rem 1.5rem;
+    justify-content: flex-start;
+    padding: 1rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom));
     background: var(--c-bg);
-    border-bottom: 1px solid var(--c-border);
-    box-shadow: var(--shadow);
+    border-top: 1px solid var(--c-border);
     display: none;
-    max-height: calc(100vh - 74px);
     overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     &.is-open {
       display: flex;
     }
@@ -415,4 +432,13 @@
 
 .calc-group + .calc-group {
   margin-top: 3rem;
+}
+
+// Lock page scrolling while the mobile menu is open.
+html.nav-open {
+  // Only on <html>: putting it on <body> too would break the sticky header.
+  overflow: hidden;
+}
+html.nav-open .theme-switcher {
+  display: none;
 }

@@ -27,7 +27,7 @@
       type="button"
       [attr.aria-expanded]="menuOpen()"
       aria-controls="main-nav"
-      (click)="menuOpen.set(!menuOpen())"
+      (click)="toggleMenu()"
     >
       <app-icon [name]="menuOpen() ? 'close' : 'menu'" />
       <span class="sr-only">Menu</span>
